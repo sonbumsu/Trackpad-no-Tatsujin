@@ -4,14 +4,16 @@ final class TitleScene: BaseScene {
     private let map = TrackpadMapNode(size: CGSize(width: 300, height: 190))
 
     override func didMove(to view: SKView) {
-        let drum = SKSpriteNode(texture: Textures.bigDon, size: CGSize(width: 150, height: 150))
-        drum.position = CGPoint(x: 640, y: 545)
-        addChild(drum)
-        drum.run(.repeatForever(.sequence([.scale(to: 1.06, duration: 0.4), .scale(to: 1, duration: 0.4)])))
-
-        let title = makeLabel("트랙패드의 달인", size: 84)
-        title.position = CGPoint(x: 640, y: 410)
-        addChild(title)
+        if let url = Bundle.main.url(forResource: "Logo", withExtension: "png"), let image = NSImage(contentsOf: url) {
+            let logo = SKSpriteNode(texture: SKTexture(image: image), size: CGSize(width: 480, height: 320))
+            logo.position = CGPoint(x: 640, y: 530)
+            addChild(logo)
+            logo.run(.repeatForever(.sequence([.scale(to: 1.03, duration: 0.4), .scale(to: 1, duration: 0.4)])))
+        } else {
+            let title = makeLabel("트랙패드의 달인", size: 84)
+            title.position = CGPoint(x: 640, y: 410)
+            addChild(title)
+        }
 
         let start = makeLabel("트랙패드를 두드려 시작", size: 28, color: Palette.gold)
         start.position = CGPoint(x: 640, y: 340)

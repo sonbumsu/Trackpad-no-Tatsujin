@@ -44,6 +44,7 @@ for arch in $ARCHS; do
 done
 lipo -create $BINARIES -output "$APP/Contents/MacOS/Trackpad-no-Tatsujin"
 cp Resources/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
+cp Resources/Logo.png "$APP/Contents/Resources/Logo.png"
 
 cat > "$APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>

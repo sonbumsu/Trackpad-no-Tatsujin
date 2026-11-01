@@ -1,7 +1,7 @@
 import AppKit
 
 // 앱 아이콘 원본(1024px PNG)을 그린다. build.sh가 이것으로 AppIcon.icns를 만든다.
-// 사용법: make_icon <출력.png>
+// 사용법: make_icon <로고.png> <출력.png>
 
 let size = 1024.0
 let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(size), pixelsHigh: Int(size),
@@ -26,28 +26,27 @@ NSGraphicsContext.current!.restoreGraphicsState()
 NSGradient(starting: NSColor(red: 0.24, green: 0.20, blue: 0.38, alpha: 1),
            ending: NSColor(red: 0.10, green: 0.09, blue: 0.17, alpha: 1))!.draw(in: tilePath, angle: -90)
 
-// 트랙패드 윤곽 (캇 영역 = 테두리)
-let pad = NSRect(x: 190, y: 250, width: 644, height: 470)
-let padPath = NSBezierPath(roundedRect: pad, xRadius: 48, yRadius: 48)
-NSColor(red: 0.27, green: 0.72, blue: 0.82, alpha: 0.9).setFill()
-padPath.fill()
-let inner = NSBezierPath(roundedRect: pad.insetBy(dx: 70, dy: 70), xRadius: 26, yRadius: 26)
-NSColor(red: 0.13, green: 0.12, blue: 0.21, alpha: 1).setFill()
-inner.fill()
-
-// 가운데 북 (동)
-func circle(_ c: NSPoint, _ r: Double) -> NSBezierPath {
-    NSBezierPath(ovalIn: NSRect(x: c.x - r, y: c.y - r, width: r * 2, height: r * 2))
+// 로고(Resources/Logo.png)를 타일 안에 꽉 차게 얹는다. 투명한 여백은 잘라낸다.
+let logoRep = NSBitmapImageRep(data: try! Data(contentsOf: URL(fileURLWithPath: CommandLine.arguments[1])))!
+var minX = logoRep.pixelsWide, minY = logoRep.pixelsHigh, maxX = 0, maxY = 0
+for y in 0..<logoRep.pixelsHigh {
+    for x in 0..<logoRep.pixelsWide where logoRep.colorAt(x: x, y: y)!.alphaComponent > 0.05 {
+        minX = min(minX, x); maxX = max(maxX, x); minY = min(minY, y); maxY = max(maxY, y)
+    }
 }
-let center = NSPoint(x: 512, y: 485)
-NSColor(white: 0.06, alpha: 1).setFill()
-circle(center, 190).fill()
-NSColor.white.setFill()
-circle(center, 172).fill()
-NSColor(red: 0.96, green: 0.30, blue: 0.20, alpha: 1).setFill()
-circle(center, 140).fill()
-NSColor(white: 1, alpha: 0.28).setFill()
-NSBezierPath(ovalIn: NSRect(x: center.x - 70, y: center.y + 45, width: 95, height: 48)).fill()
+// colorAt은 위에서부터 세므로 그리기 좌표(아래에서부터)로 뒤집는다
+let crop = NSRect(x: minX, y: logoRep.pixelsHigh - 1 - maxY, width: maxX - minX + 1, height: maxY - minY + 1)
+let logo = NSImage(size: NSSize(width: logoRep.pixelsWide, height: logoRep.pixelsHigh))
+logo.addRepresentation(logoRep)
+let box = tile.insetBy(dx: 30, dy: 30)
+let scale = min(box.width / crop.width, box.height / crop.height)
+let drawSize = NSSize(width: crop.width * scale, height: crop.height * scale)
+NSGraphicsContext.current!.saveGraphicsState()
+tilePath.addClip()
+logo.draw(in: NSRect(x: box.midX - drawSize.width / 2, y: box.midY - drawSize.height / 2,
+                     width: drawSize.width, height: drawSize.height),
+          from: crop, operation: .sourceOver, fraction: 1)
+NSGraphicsContext.current!.restoreGraphicsState()
 
 NSGraphicsContext.restoreGraphicsState()
-try! rep.representation(using: .png, properties: [:])!.write(to: URL(fileURLWithPath: CommandLine.arguments[1]))
+try! rep.representation(using: .png, properties: [:])!.write(to: URL(fileURLWithPath: CommandLine.arguments[2]))

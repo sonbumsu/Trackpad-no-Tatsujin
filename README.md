@@ -1,3 +1,5 @@
+<p align="center"><img src="Resources/Logo.png" alt="트랙패드의 달인" width="480"></p>
+
 # 트랙패드의 달인 (Trackpad-no-Tatsujin)
 
 맥북 트랙패드를 북처럼 두드리는 태고의 달인 스타일 리듬게임. 자세한 설계는 [SPEC.md](SPEC.md).
@@ -74,7 +76,7 @@ cd Trackpad-no-Tatsujin
   SIGN_ID="Developer ID Application: <이름> (<TEAMID>)" NOTARY_PROFILE=trackpad-no-tatsujin ./build.sh release
   ```
 - 번들 ID는 `BUNDLE_ID` 환경변수로 바꿀 수 있다(기본 `app.trackpad-no-tatsujin.mac`).
-- 앱 아이콘은 [Tools/make_icon.swift](Tools/make_icon.swift)로 그린 것이고 `Resources/AppIcon.icns`에 들어 있다.
+- 앱 아이콘은 [Tools/make_icon.swift](Tools/make_icon.swift)가 `Resources/Logo.png`를 둥근 사각형 타일에 얹어 그린 것이고 `Resources/AppIcon.icns`에 들어 있다. 로고를 바꾸면 `swiftc Tools/make_icon.swift -o .build/make_icon && .build/make_icon Resources/Logo.png icon.png`로 다시 그린 뒤 `iconutil`로 icns를 만든다.
 
 ### 구조
 

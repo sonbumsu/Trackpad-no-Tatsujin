@@ -9,7 +9,7 @@ final class TitleScene: BaseScene {
         addChild(drum)
         drum.run(.repeatForever(.sequence([.scale(to: 1.06, duration: 0.4), .scale(to: 1, duration: 0.4)])))
 
-        let title = makeLabel("트릭패드의 달인", size: 84)
+        let title = makeLabel("트랙패드의 달인", size: 84)
         title.position = CGPoint(x: 640, y: 410)
         addChild(title)
 

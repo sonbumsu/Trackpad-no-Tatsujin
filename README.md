@@ -1,4 +1,4 @@
-# 트릭패드의 달인 (Trackpad-no-Tatsujin)
+# 트랙패드의 달인 (Trackpad-no-Tatsujin)
 
 맥북 트랙패드를 북처럼 두드리는 태고의 달인 스타일 리듬게임. 자세한 설계는 [SPEC.md](SPEC.md).
 
@@ -9,7 +9,7 @@
 ### 방법 1. 내려받기 (권장)
 
 1. [Releases](https://github.com/sonbumsu/Trackpad-no-Tatsujin/releases/latest)에서 `Trackpad-no-Tatsujin-<버전>.dmg`를 받는다.
-2. dmg를 열고 **트릭패드의 달인**을 **Applications** 폴더로 끌어다 놓는다.
+2. dmg를 열고 **트랙패드의 달인**을 **Applications** 폴더로 끌어다 놓는다.
 3. 처음 열 때 "열 수 없음" 경고가 나오면 [INSTALL.md](INSTALL.md)의 안내를 따른다(개발자 인증을 받지 않은 앱이라 한 번 허용해야 한다).
 
 ### 방법 2. 직접 빌드

@@ -139,7 +139,7 @@ extension DemoSong {
     /// 150 BPM, 가 단조. 네 난이도 모두 있다.
     static let festival = DemoSong(
         title: "트랙패드 페스티벌",
-        subtitle: "트릭패드의 달인 기본 수록곡",
+        subtitle: "트랙패드의 달인 기본 수록곡",
         levels: [.easy: 3, .normal: 5, .hard: 7, .oni: 8],
         balloon: [.easy: 5, .normal: 8, .hard: 12, .oni: 16],
         progression: [Chord(root: 57, minor: true), Chord(root: 53, minor: false),
@@ -190,7 +190,7 @@ extension DemoSong {
     /// 112 BPM, 다 장조. 끝부분에서 96 BPM으로 느려진다.
     static let stroll = DemoSong(
         title: "느긋한 산책",
-        subtitle: "트릭패드의 달인 기본 수록곡",
+        subtitle: "트랙패드의 달인 기본 수록곡",
         levels: [.easy: 2, .normal: 4, .hard: 6],
         balloon: [.easy: 4, .normal: 6, .hard: 10],
         progression: [Chord(root: 48, minor: false), Chord(root: 55, minor: false),

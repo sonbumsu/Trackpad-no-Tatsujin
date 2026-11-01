@@ -50,8 +50,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleName</key><string>트릭패드의 달인</string>
-    <key>CFBundleDisplayName</key><string>트릭패드의 달인</string>
+    <key>CFBundleName</key><string>트랙패드의 달인</string>
+    <key>CFBundleDisplayName</key><string>트랙패드의 달인</string>
     <key>CFBundleIdentifier</key><string>$BUNDLE_ID</string>
     <key>CFBundleExecutable</key><string>Trackpad-no-Tatsujin</string>
     <key>CFBundleIconFile</key><string>AppIcon</string>
@@ -61,7 +61,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>LSMinimumSystemVersion</key><string>14.0</string>
     <key>NSHighResolutionCapable</key><true/>
     <key>LSApplicationCategoryType</key><string>public.app-category.music-games</string>
-    <key>NSHumanReadableCopyright</key><string>트릭패드의 달인</string>
+    <key>NSHumanReadableCopyright</key><string>트랙패드의 달인</string>
 </dict>
 </plist>
 PLIST
@@ -87,16 +87,16 @@ if [[ "${1:-}" == "release" ]]; then
     trap 'rm -rf "${STAGE:h}"' EXIT
     rm -f "$DMG"
     mkdir -p "$STAGE" dist
-    ditto --noextattr --noqtn "$APP" "$STAGE/트릭패드의 달인.app"
+    ditto --noextattr --noqtn "$APP" "$STAGE/트랙패드의 달인.app"
     if [[ -n "$SIGN_ID" ]]; then
-        codesign --force --options runtime --timestamp --sign "$SIGN_ID" "$STAGE/트릭패드의 달인.app"
+        codesign --force --options runtime --timestamp --sign "$SIGN_ID" "$STAGE/트랙패드의 달인.app"
     else
-        codesign --force --sign - "$STAGE/트릭패드의 달인.app"
+        codesign --force --sign - "$STAGE/트랙패드의 달인.app"
     fi
-    codesign --verify --deep --strict "$STAGE/트릭패드의 달인.app"
+    codesign --verify --deep --strict "$STAGE/트랙패드의 달인.app"
     ln -s /Applications "$STAGE/Applications"
     cp "INSTALL.md" "$STAGE/설치 방법.txt"
-    hdiutil create -volname "트릭패드의 달인 $VERSION" -srcfolder "$STAGE" -ov -format UDZO "$DMG" >/dev/null
+    hdiutil create -volname "트랙패드의 달인 $VERSION" -srcfolder "$STAGE" -ov -format UDZO "$DMG" >/dev/null
 
     if [[ -n "$SIGN_ID" ]]; then
         codesign --force --timestamp --sign "$SIGN_ID" "$DMG"

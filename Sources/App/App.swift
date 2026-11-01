@@ -79,7 +79,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 1280, height: 720),
                           styleMask: [.titled, .closable, .miniaturizable, .resizable],
                           backing: .buffered, defer: false)
-        window.title = "트릭패드의 달인"
+        window.title = "트랙패드의 달인"
         window.contentAspectRatio = NSSize(width: 16, height: 9)
         window.collectionBehavior = [.fullScreenPrimary]
         window.delegate = self
@@ -130,7 +130,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         appMenu.addItem(withTitle: "전체 화면", action: #selector(NSWindow.toggleFullScreen(_:)), keyEquivalent: "f")
             .keyEquivalentModifierMask = [.command, .control]
         appMenu.addItem(.separator())
-        appMenu.addItem(withTitle: "트릭패드의 달인 종료", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        appMenu.addItem(withTitle: "트랙패드의 달인 종료", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         appItem.submenu = appMenu
         NSApp.mainMenu = main
     }
